@@ -8,7 +8,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://your-project-id.web.app", "https://your-project-id.firebaseapp.com") // Firebase 주소
+                .allowedOrigins("https://kovalt03.web.app", "https://kovalt03.firebaseapp.com") // Firebase 주소
                 .allowedMethods("*")
                 .allowedHeaders("*");
     }
