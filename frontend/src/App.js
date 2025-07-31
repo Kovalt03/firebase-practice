@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = async () => {
+    const res = await fetch(`https://firebase-practice-kcf3.onrender.com/api/hello?name=${name}`);
+    const text = await res.text();
+    setMessage(text);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Spring 연결 테스트</h1>
+      <input
+        type="text"
+        placeholder="이름 입력"
+        value={name}
+        onChange={e => setName(e.target.value)}
+      />
+      <button onClick={handleSubmit}>서버에 요청</button>
+      <p>{message}</p>
     </div>
   );
 }

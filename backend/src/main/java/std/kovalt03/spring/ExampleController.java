@@ -3,11 +3,11 @@ package std.kovalt03.spring;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
-public class ExampleController {
+@CrossOrigin(origins = "*")
+public class HelloController {
 
-    @GetMapping("/message")
-    public String getMessage() {
-        return "Hello from Spring Boot!";
+    @GetMapping("/api/hello")
+    public String getMessage(@RequestParam String name) {
+        return "Hello " + name + "from Spring Boot!";
     }
 }
