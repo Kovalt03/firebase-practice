@@ -12,6 +12,7 @@ function App() {
 
   return (
     <div>
+      <Login />
       <h1>Spring 연결 테스트</h1>
       <input
         type="text"
