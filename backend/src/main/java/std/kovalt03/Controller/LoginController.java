@@ -21,7 +21,7 @@ public class LoginController {
         if ("admin".equals(username) && "1234".equals(password)) {
             String sessionId = UUID.randomUUID().toString();
 
-            String cookieValue = "sessionId=" + sessionId + "; HttpOnly; Path=/; SameSite=None; Secure; Domain=kovalt03.web.app; Max-Age=3600";
+            String cookieValue = "sessionId=" + sessionId + "; HttpOnly; Path=/; SameSite=None; Secure; Max-Age=3600";
 
             response.setHeader("Set-Cookie", cookieValue);
 

@@ -23,16 +23,22 @@ const Login = () => {
                 password: encodedPassword
             }),
         });
-        const cookie = await res.headers.get('Set-Cookie');
-        console.log(cookie);
         console.log(res.body);
-        if (cookie) {
-            document.cookie = cookie;
+        if (res.ok) {
             // Login('success');
             alert('Login successful!');
-            const res2 = await fetch(`${BASE_URL}/usr`);
-            const data = await res2.json();
-            <h1>{data}</h1>
+            const res2 = await fetch(`${BASE_URL}/usr`, {
+                method: 'GET',
+                credentials: 'include',
+            });
+            if (res2.ok) {
+                const data = await res2.json();
+                <h1>{data}</h1>
+            }else{
+                alert('Failed to fetch user data.');
+                window.location.href = '/';
+                return;
+            }
         }else{
             // Login('failure');
             alert('Login failed. Please check your username and password.');
