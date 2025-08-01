@@ -17,21 +17,23 @@ const Login = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            credentials: 'include',
             body: JSON.stringify({
                 username: username,
                 password: encodedPassword
             }),
         });
-        const cookie = res.headers.get('Set-Cookie');
+        const cookie = await res.headers.get('Set-Cookie');
         console.log(res.body);
         if (cookie) {
             document.cookie = cookie;
             // Login('success');
             alert('Login successful!');
-            window.location.href = '/'; // Redirect to home page after successful login
+            window.location.href = '/';
         }else{
             // Login('failure');
             alert('Login failed. Please check your username and password.');
+            window.location.href = '/';
             return;
         }
         console.log('Username:', username, 'Password:', password);

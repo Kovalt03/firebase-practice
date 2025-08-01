@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import std.kovalt03.dto.MessageRequest;
 
 @RestController
+@CrossOrigin(origins = "https://kovalt03.web.app", allowCredentials = "true")
 public class LoginController {
 
     @PostMapping("/login")
@@ -14,7 +15,7 @@ public class LoginController {
         String password = request.getPassword();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Set-Cookie", "sessionId=1234; Path=/; HttpOnly; Secure; SameSite=Lax");
+        headers.add("Set-Cookie", "sessionId=1234; Path=/; HttpOnly; Secure; SameSite=None");
 
         String body = "id: " + request.getUsername() + ", password: " + request.getPassword();
         if (username.equals("admin") && password.equals("1234")) {
