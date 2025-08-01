@@ -3,6 +3,10 @@ package std.kovalt03.controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.util.UUID;
 import std.kovalt03.dto.MessageRequest;
 
 @RestController
@@ -16,11 +20,12 @@ public class LoginController {
 
         if ("admin".equals(username) && "1234".equals(password)) {
             String sessionId = UUID.randomUUID().toString();
+
             Cookie cookie = new Cookie("sessionId", sessionId);
             cookie.setPath("/");
             cookie.setHttpOnly(true);
             cookie.setSecure(true);
-            cookie.setSameSite("None");
+            cookie.setSameSite("lax");
             cookie.setMaxAge(60*60*3); // Set cookie expiration time to 1 hour
             cookie.setDomain("kovalt03.web.app");
             
