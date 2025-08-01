@@ -25,7 +25,7 @@ public class LoginController {
             cookie.setPath("/");
             cookie.setHttpOnly(true);
             cookie.setSecure(true);
-            cookie.setSameSite("lax");
+            // cookie.setSameSite("lax");
             cookie.setMaxAge(60*60*3); // Set cookie expiration time to 1 hour
             cookie.setDomain("kovalt03.web.app");
             
