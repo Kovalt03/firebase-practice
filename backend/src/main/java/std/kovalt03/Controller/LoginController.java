@@ -11,10 +11,12 @@ import std.kovalt03.dto.MessageRequest;
 
 @RestController
 @CrossOrigin(origins = "https://kovalt03.web.app", allowCredentials = "true")
+@RequestMapping("/api")
 public class LoginController {
 
     @GetMapping("/hi")
     public String hi() {
+        System.out.println("hi");
         return "Hello from LoginController!";
     }
 
