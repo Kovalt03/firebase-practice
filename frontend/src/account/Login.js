@@ -26,6 +26,8 @@ const Login = () => {
         if (cookie) {
             document.cookie = cookie;
             Login('success');
+            alert('Login successful!');
+            window.location.href = '/'; // Redirect to home page after successful login
         }else{
             Login('failure');
             alert('Login failed. Please check your username and password.');

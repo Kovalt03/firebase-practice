@@ -1,7 +1,7 @@
-package std.kovalt03.spring;
-// package std.kovalt03.dto;
-import org.springframework.web.bind.annotation.*;
+package std.kovalt03.controller;
 
+import org.springframework.web.bind.annotation.*;
+import std.kovalt03.dto.MessageRequest;
 @RestController
 public class LoginController {
 
