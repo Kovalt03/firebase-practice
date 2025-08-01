@@ -23,13 +23,14 @@ const Login = () => {
             }),
         });
         const cookie = res.headers.get('Set-Cookie');
+        console.log(res.body);
         if (cookie) {
             document.cookie = cookie;
-            Login('success');
+            // Login('success');
             alert('Login successful!');
             window.location.href = '/'; // Redirect to home page after successful login
         }else{
-            Login('failure');
+            // Login('failure');
             alert('Login failed. Please check your username and password.');
             return;
         }
@@ -37,7 +38,7 @@ const Login = () => {
     };
 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
         <div>
             <label htmlFor="username">Username:</label>
             <input type="text" id="username" name="username" required />
@@ -46,7 +47,7 @@ const Login = () => {
             <label htmlFor="password">Password:</label>
             <input type="password" id="password" name="password" required />
         </div>
-        <button type="submit" onSubmit={handleSubmit}>Login</button>
+        <button type="submit">Login</button>
         </form>
     );
 }
