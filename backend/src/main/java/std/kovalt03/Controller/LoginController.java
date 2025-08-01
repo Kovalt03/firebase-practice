@@ -23,7 +23,7 @@ public class LoginController {
 
             String cookieValue = "sessionId=" + sessionId + "; HttpOnly; Path=/; SameSite=None; Secure; Domain=kovalt03.web.app; Max-Age=3600";
 
-            response.setHeader('Set-Cookie', cookieValue);
+            response.setHeader("Set-Cookie", cookieValue);
 
             return ResponseEntity.ok("Login Success");
         }
