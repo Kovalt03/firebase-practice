@@ -17,7 +17,7 @@ public class LoginController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Set-Cookie", "sessionId=; Path=/; HttpOnly; Secure; SameSite=Lax");
 
-        String body "id: " + request.getUsername() + ", password: " + request.getPassword();
+        String body = "id: " + request.getUsername() + ", password: " + request.getPassword();
         if (username == "admin" && password == "1234") {
             return ResponseEntity.ok()
                     .headers(headers)
