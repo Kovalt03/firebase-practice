@@ -13,6 +13,11 @@ import std.kovalt03.dto.MessageRequest;
 @CrossOrigin(origins = "https://kovalt03.web.app", allowCredentials = "true")
 public class LoginController {
 
+    @GetMapping("/hi")
+    public String hi() {
+        return "Hello from LoginController!";
+    }
+
     @PostMapping("/login")
     public ResponseEntity<String> Response(@RequestBody MessageRequest request, HttpServletResponse response) {
         String username = request.getUsername();

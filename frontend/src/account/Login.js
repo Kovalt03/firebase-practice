@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 const BASE_URL = "https://firebase-practice-kcf3.onrender.com";
 
 const Login = () => {
-    // const username, setUsername = useState('');
-    // const password, setPassword = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,7 +18,7 @@ const Login = () => {
             credentials: 'include',
             body: JSON.stringify({
                 username: username,
-                password: encodedPassword
+                password: password
             }),
         });
         console.log(res.body);
