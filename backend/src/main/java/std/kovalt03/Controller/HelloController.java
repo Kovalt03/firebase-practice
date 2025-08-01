@@ -12,4 +12,10 @@ public class HelloController {
     public String getMessage(@RequestParam String name) {
         return "Hello " + name + "from Spring Boot!";
     }
+
+    @GetMapping("/hi")
+    public String hi() {
+        System.out.println("hi");
+        return "Hello from LoginController!";
+    }
 }
