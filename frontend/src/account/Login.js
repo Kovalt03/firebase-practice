@@ -11,7 +11,7 @@ const Login = () => {
         const username = formData.get('username');
         const password = formData.get('password');
         // encoding
-        const encodedPassword = encodeURIComponent(password);
+        const encodedPassword = password;
         const res = await fetch(`${BASE_URL}/login`, {
             method: 'POST',
             headers: {
@@ -24,12 +24,13 @@ const Login = () => {
             }),
         });
         const cookie = await res.headers.get('Set-Cookie');
+        console.log(cookie);
         console.log(res.body);
         if (cookie) {
             document.cookie = cookie;
             // Login('success');
             alert('Login successful!');
-            window.location.href = '/';
+            window.location.href = '/usr';
         }else{
             // Login('failure');
             alert('Login failed. Please check your username and password.');

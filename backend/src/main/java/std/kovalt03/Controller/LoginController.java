@@ -10,20 +10,39 @@ import std.kovalt03.dto.MessageRequest;
 public class LoginController {
 
     @PostMapping("/login")
-    public ResponseEntity<String> Response(@RequestBody MessageRequest request) {
+    public ResponseEntity<String> Response(@RequestBody MessageRequest request, HttpServletResponse response) {
         String username = request.getUsername();
         String password = request.getPassword();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Set-Cookie", "sessionId=1234; Path=/; HttpOnly; Secure; SameSite=None");
+        if ("admin".equals(username) && "1234".equals(password)) {
+            String sessionId = UUID.randomUUID().toString();
+            Cookie cookie = new Cookie("sessionId", sessionId);
+            cookie.setPath("/");
+            cookie.setHttpOnly(true);
+            cookie.setSecure(true);
+            cookie.setSameSite("None");
+            cookie.setMaxAge(60*60*3); // Set cookie expiration time to 1 hour
+            cookie.setDomain("kovalt03.web.app");
+            
+            response.addCookie(cookie);
 
-        String body = "id: " + request.getUsername() + ", password: " + request.getPassword();
-        if (username.equals("admin") && password.equals("1234")) {
-            return ResponseEntity.ok()
-                    .headers(headers)
-                    .body(body);
+            return ResponseEntity.ok();
         }
         return ResponseEntity.status(401)
                 .body("There is no user with this username and password");
+    }
+
+    @GetMapping("/usr")
+    public ResponseEntity<String> getUser(HttpServletRequest request){
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("sessionId".equals(cookie.getName())) {
+                    String sessionId = cookie.getValue();
+                    return ResponseEntity.ok("User is logged in with session ID: " + sessionId);
+                }
+            }
+        }
+        return ResponseEntity.status(401).body("No permission to access this resource. Please log in.");
     }
 }
