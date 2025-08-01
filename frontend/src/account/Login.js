@@ -30,7 +30,9 @@ const Login = () => {
             document.cookie = cookie;
             // Login('success');
             alert('Login successful!');
-            window.location.href = '/usr';
+            const res2 = await fetch(`${BASE_URL}/usr`);
+            const data = await res2.json();
+            <h1>{data}</h1>
         }else{
             // Login('failure');
             alert('Login failed. Please check your username and password.');

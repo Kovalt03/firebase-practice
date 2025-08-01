@@ -10,6 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("https://kovalt03.web.app", "https://kovalt03.firebaseapp.com") // Firebase 주소
                 .allowedMethods("*")
+                .allowCredentials(true)
                 .allowedHeaders("*");
     }
 }
