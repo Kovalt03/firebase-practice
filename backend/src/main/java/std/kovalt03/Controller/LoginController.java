@@ -10,7 +10,6 @@ import java.util.UUID;
 import std.kovalt03.dto.MessageRequest;
 
 @RestController
-@CrossOrigin(origins = "https://kovalt03.web.app", allowCredentials = "true")
 @RequestMapping("/api")
 public class LoginController {
 
