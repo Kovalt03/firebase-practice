@@ -15,7 +15,7 @@ public class LoginController {
         String password = request.getPassword();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Set-Cookie", "sessionId=; Path=/; HttpOnly; Secure; SameSite=Lax");
+        headers.add("Set-Cookie", "sessionId=1234; Path=/; HttpOnly; Secure; SameSite=Lax");
 
         String body = "id: " + request.getUsername() + ", password: " + request.getPassword();
         if (username == "admin" && password == "1234") {
@@ -24,7 +24,6 @@ public class LoginController {
                     .body(body);
         }
         return ResponseEntity.ok()
-                .headers(null)
                 .body("There is no user with this username and password");
     }
 }
