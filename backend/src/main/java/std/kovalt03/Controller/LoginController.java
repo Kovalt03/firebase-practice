@@ -21,17 +21,11 @@ public class LoginController {
         if ("admin".equals(username) && "1234".equals(password)) {
             String sessionId = UUID.randomUUID().toString();
 
-            Cookie cookie = new Cookie("sessionId", sessionId);
-            cookie.setPath("/");
-            cookie.setHttpOnly(true);
-            cookie.setSecure(true);
-            // cookie.setSameSite("lax");
-            cookie.setMaxAge(60*60*3); // Set cookie expiration time to 1 hour
-            cookie.setDomain("kovalt03.web.app");
-            
-            response.addCookie(cookie);
+            String cookieValue = "sessionId=" + sessionId + "; HttpOnly; Path=/; SameSite=None; Secure; Domain=kovalt03.web.app; Max-Age=3600";
 
-            return ResponseEntity.ok();
+            response.setHeader('Set-Cookie', cookieValue);
+
+            return ResponseEntity.ok("Login Success");
         }
         return ResponseEntity.status(401)
                 .body("There is no user with this username and password");
