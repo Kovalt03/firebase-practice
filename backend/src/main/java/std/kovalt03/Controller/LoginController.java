@@ -22,7 +22,8 @@ public class LoginController {
     public ResponseEntity<String> Response(@RequestBody MessageRequest request, HttpServletResponse response) {
         String username = request.getUsername();
         String password = request.getPassword();
-
+        System.out.println("Username: " + username);
+        System.out.println("Password: " + password);
         if ("admin".equals(username) && "1234".equals(password)) {
             String sessionId = UUID.randomUUID().toString();
 
