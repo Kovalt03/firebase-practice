@@ -2,7 +2,7 @@ package std.kovalt03.dto;
 
 public class MessageRequest {
     private String username;
-    private String hashedPassword;
+    private String password;
 
     public String getUsername() {
         return username;
@@ -13,10 +13,10 @@ public class MessageRequest {
     }
 
     public String getPassword() {
-        return hashedPassword;
+        return password;
     }
 
-    public void setPassWord(String hashedPassword) {
-        this.hashedPassword = hashedPassword;
+    public void setPassWord(String password) {
+        this.password = password;
     }
 }
