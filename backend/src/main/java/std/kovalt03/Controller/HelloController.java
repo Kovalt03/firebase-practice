@@ -13,9 +13,4 @@ public class HelloController {
         return "Hello " + name + "from Spring Boot!";
     }
 
-    @GetMapping("/hi")
-    public String hi() {
-        System.out.println("hi");
-        return "Hello from LoginController!";
-    }
 }

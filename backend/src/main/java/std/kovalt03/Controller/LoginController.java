@@ -1,4 +1,4 @@
-package std.kovalt03.controller;
+package std.kovalt03.spring;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpHeaders;
@@ -10,7 +10,6 @@ import java.util.UUID;
 import std.kovalt03.dto.MessageRequest;
 
 @RestController
-@RequestMapping("/api")
 public class LoginController {
 
     @GetMapping("/hi")
