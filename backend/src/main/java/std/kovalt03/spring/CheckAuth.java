@@ -12,7 +12,7 @@ import java.util.Map;
 public class CheckAuth {
 
     @GetMapping("/check-auth")
-    public ResponseEntity<String> getUser(HttpServletRequest request) {
+    public ResponseEntity<Map<String, String>> getUser(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
@@ -24,15 +24,15 @@ public class CheckAuth {
                     userData.put("role", "user");
                     userData.put("username", "testUser");
 
-                    authData.put("role", UserData.get("role"));
-                    authData.put("username", UserData.get("username"));
+                    authData.put("role", userData.get("role"));
+                    authData.put("username", userData.get("username"));
                     return ResponseEntity.ok(authData);
                 }
             }
         }
-        return ResponseEntity.status(401).body({
-            "error": "Unauthorized",
-            "message": "User is not authenticated"
-        });
+        Map<String, String> error = new HashMap<>();
+        error.put("error", "Unauthorized");
+        error.put("message", "User is not authenticated");
+        return ResponseEntity.status(401).body(error);
     }
 }
