@@ -1,8 +1,9 @@
-import React, { useState } from 'react';    
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 const BASE_URL = "https://firebase-practice-kcf3.onrender.com";
 
 const Login = () => {
-
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -24,40 +25,31 @@ const Login = () => {
         console.log(res.body);
         if (res.ok) {
             // Login('success');
-            alert('Login successful!');
-            const res2 = await fetch(`${BASE_URL}/usr`, {
-                method: 'GET',
-                credentials: 'include',
-            });
-            if (res2.ok) {
-                const data = await res2.json();
-                <h1>{data}</h1>
-            }else{
-                alert('Failed to fetch user data.');
-                window.location.href = '/';
-                return;
-            }
+            alert('Login successful!')
+            navigate('/chat');
+            return;
         }else{
-            // Login('failure');
             alert('Login failed. Please check your username and password.');
             window.location.href = '/';
             return;
         }
-        console.log('Username:', username, 'Password:', password);
     };
 
     return (
-        <form onSubmit={handleSubmit}>
         <div>
-            <label htmlFor="username">Username:</label>
-            <input type="text" id="username" name="username" required />
+            <h1>Login to Start Chatting!</h1>
+            <form onSubmit={handleSubmit}>
+            <div>
+                <label htmlFor="username">Username:</label>
+                <input type="text" id="username" name="username" required />
+            </div>
+            <div>
+                <label htmlFor="password">Password:</label>
+                <input type="password" id="password" name="password" required />
+            </div>
+            <button type="submit">Login</button>
+            </form>
         </div>
-        <div>
-            <label htmlFor="password">Password:</label>
-            <input type="password" id="password" name="password" required />
-        </div>
-        <button type="submit">Login</button>
-        </form>
     );
 }
 

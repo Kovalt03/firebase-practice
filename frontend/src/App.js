@@ -1,28 +1,27 @@
 import React, { useState } from 'react';
 import Login from './account/Login';
-function App() {
-  const [name, setName] = useState('');
-  const [message, setMessage] = useState('');
+import Register from './account/Register';
+import Chat from './main/Chat';
+import { BrowserRouter, Route, Routes as Routers } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import PrivateRoute from './main/PrivateRoute';
+import { checkAuth } from './utils/checkAuth';
 
-  const handleSubmit = async () => {
-    const res = await fetch(`https://firebase-practice-kcf3.onrender.com/api/hello?name=${name}`);
-    const text = await res.text();
-    setMessage(text);
-  };
+function App() {
 
   return (
-    <div>
-      <Login />
-      <h1>Spring 연결 테스트</h1>
-      <input
-        type="text"
-        placeholder="이름 입력"
-        value={name}
-        onChange={e => setName(e.target.value)}
-      />
-      <button onClick={handleSubmit}>서버에 요청</button>
-      <p>{message}</p>
-    </div>
+    <BrowserRouter>
+      <Routers>
+        <Route path="/" element={<Navigate to = {checkAuth() ? '/chat' : '/login'} />} />
+        {/* Public routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        {/* Private routes */}
+        <Route path="/chat" element={<PrivateRoute><Chat /></PrivateRoute>} />
+        {/* Else routes*/}
+        <Route path="*" element={<div>404 Not Found</div>} />
+      </Routers>
+    </BrowserRouter>
   );
 }
 

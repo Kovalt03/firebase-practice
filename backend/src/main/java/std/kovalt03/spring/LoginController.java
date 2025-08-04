@@ -20,7 +20,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> Response(@RequestBody MessageRequest request, HttpServletResponse response) {
+    public ResponseEntity<String> Login(@RequestBody MessageRequest request, HttpServletResponse response) {
         String username = request.getUsername();
         String password = request.getPassword();
         System.out.println("Username: " + username);
@@ -37,6 +37,21 @@ public class LoginController {
         return ResponseEntity.status(401)
                 .body("There is no user with this username and password");
     }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> Register(@RequestBody MessageRequest request, HttpServletResponse response) {
+        String username = request.getUsername();
+        String password = request.getPassword();
+        System.out.println("Username: " + username);
+        System.out.println("Password: " + password);
+        if ("admin".equals(username) && "1234".equals(password)) {
+
+            return ResponseEntity.ok("Login Success");
+        }
+        return ResponseEntity.status(401)
+                .body("There is no user with this username and password");
+    }
+
 
     @GetMapping("/usr")
     public ResponseEntity<String> getUser(HttpServletRequest request){
