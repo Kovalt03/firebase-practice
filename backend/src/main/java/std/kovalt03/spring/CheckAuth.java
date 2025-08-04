@@ -1,5 +1,12 @@
 package std.kovalt03.spring;
 
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @CrossOrigin(origins = "https://kovalt03.web.app", allowCredentials = "true")
 public class CheckAuth {
@@ -12,13 +19,13 @@ public class CheckAuth {
                 if ("sessionId".equals(cookie.getName())) {
                     Map<String, String> authData = new HashMap<>();
                     String sessionId = cookie.getValue();
-                    // const userData = getUserData(sessionId, sessionData);
-                    const UserData = {
-                        "role": "user",
-                        "username": "testUser"
-                    };
-                    authData.put("role", UserData.role);
-                    authData.put("username", UserData.username);
+                    //  Map<String, String> userData = getUserData(sessionId, sessionData);
+                    Map<String, String> userData = new HashMap<>();
+                    userData.put("role", "user");
+                    userData.put("username", "testUser");
+
+                    authData.put("role", UserData.get("role"));
+                    authData.put("username", UserData.get("username"));
                     return ResponseEntity.ok(authData);
                 }
             }
