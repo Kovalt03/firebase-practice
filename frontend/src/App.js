@@ -12,7 +12,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routers>
-        <Route path="/" element={<Navigate to = {checkAuth() ? '/chat' : '/login'} />} />
+        <Route path="/" element={<Navigate to = {checkAuth() != 0 ? '/chat' : '/login'} />} />
         {/* Public routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

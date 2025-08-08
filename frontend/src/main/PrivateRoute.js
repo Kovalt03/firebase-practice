@@ -14,8 +14,13 @@ const PrivateRoute = ({ children }) => {
         alert("Admin access granted.");
         return children; // Admin can access the route
     }
-    alert("User access granted.");
-    return <Navigate to="/chat" />;
+    if(role === 1) {
+        alert("User access granted.");
+        return children; // User can access the route
+    }
+    alert("error");
+    return <Navigate to="/login" />;
+    
 }
 
 export default PrivateRoute;
