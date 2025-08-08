@@ -6,26 +6,27 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import std.kovalt03.db.GetUserDB;
+import std.kovalt03.dto.MessageRequest;
 
 @RestController
 @CrossOrigin(origins = "https://kovalt03.web.app", allowCredentials = "true")
 public class CheckAuth {
 
-    @GetMapping("/check-auth")
-    public ResponseEntity<Map<String, String>> getUser(HttpServletRequest request) {
+    @PostMapping("/check-auth")
+    public ResponseEntity<Map<String, String>> getUser(HttpServletRequest request, @RequestBody MessageRequest requestBody) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if ("sessionId".equals(cookie.getName())) {
-                    Map<String, String> authData = new HashMap<>();
+                    Map<String, String> authData = GetUserDB.getSession(requestBody.getUsername());
                     String sessionId = cookie.getValue();
-                    //  Map<String, String> userData = getUserData(sessionId, sessionData);
-                    Map<String, String> userData = new HashMap<>();
-                    userData.put("role", "user");
-                    userData.put("username", "testUser");
-
-                    authData.put("role", userData.get("role"));
-                    authData.put("username", userData.get("username"));
+                    if(!authData.get("sessionID").equals(sessionId)) {
+                        Map<String, String> error = new HashMap<>();
+                        error.put("error", "Unauthorized");
+                        error.put("message", "Session ID does not match");
+                        return ResponseEntity.status(401).body(error);
+                    }
                     return ResponseEntity.ok(authData);
                 }
             }
