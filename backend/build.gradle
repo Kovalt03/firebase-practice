@@ -34,7 +34,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
 	// JPA 의존성 추가
-    implementation 'javax.persistence:javax.persistence-api:2.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     // Hibernate 의존성 추가
